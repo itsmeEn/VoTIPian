@@ -115,7 +115,5 @@ Votipian is a full-stack web application for managing and conducting online elec
    - Frontend: http://localhost:3000
    - Backend API: http://localhost:5000
 
-## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
 
