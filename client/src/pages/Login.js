@@ -36,9 +36,11 @@ const Login = () => {
       const response = await login(values);
       if (response.requiresVerification) {
         setUnverifiedEmail(response.email);
-        setLoginError('Please verify your email before logging in');
+        setLoginError(response.msg || 'Please verify your email before logging in');
       } else if (response.success) {
         navigate('/dashboard');
+      } else {
+        setLoginError(response.msg || 'Login failed. Please try again.');
       }
     } catch (error) {
       setLoginError(error.message || 'Login failed. Please try again.');

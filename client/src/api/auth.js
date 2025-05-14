@@ -1,9 +1,10 @@
 import axios from 'axios';
+import API_URL from './config';
 
 // Register user
 export const registerUser = async (userData) => {
   try {
-    const res = await axios.post('/api/auth/register', userData);
+    const res = await axios.post(`${API_URL}/api/auth/register`, userData);
     return res.data;
   } catch (err) {
     throw err.response.data;
@@ -13,7 +14,7 @@ export const registerUser = async (userData) => {
 // Login user
 export const loginUser = async (email, password) => {
   try {
-    const res = await axios.post('/api/auth/login', { email, password });
+    const res = await axios.post(`${API_URL}/api/auth/login`, { email, password });
     return res.data;
   } catch (err) {
     throw err.response.data;
@@ -23,7 +24,7 @@ export const loginUser = async (email, password) => {
 // Get current user
 export const getCurrentUser = async () => {
   try {
-    const res = await axios.get('/api/auth/me');
+    const res = await axios.get(`${API_URL}/api/auth/me`);
     return res.data;
   } catch (err) {
     throw err.response.data;

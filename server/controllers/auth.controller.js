@@ -224,27 +224,43 @@ exports.resendVerification = async (req, res) => {
 // @access  Public
 exports.verifyEmail = async (req, res) => {
   const { token } = req.query;
+  console.log('Received verification request with token:', token);
 
   try {
     // Find user with matching verification token
+    console.log('Searching for user with verification token...');
     const user = await User.findOne({
       verificationToken: token,
       verificationTokenExpires: { $gt: Date.now() }
     });
 
     if (!user) {
+      console.log('No user found with the provided token or token has expired');
+      console.log('Current time:', new Date());
       return res.status(400).json({ msg: 'Invalid or expired verification token' });
     }
+
+    console.log('User found:', {
+      id: user._id,
+      email: user.email,
+      tokenExpires: user.verificationTokenExpires
+    });
 
     // Update user's verification status
     user.isEmailVerified = true;
     user.verificationToken = undefined;
     user.verificationTokenExpires = undefined;
     await user.save();
+    console.log('User verification status updated successfully');
 
     res.json({ msg: 'Email verified successfully' });
   } catch (err) {
-    console.error(err.message);
-    res.status(500).send('Server error');
+    console.error('Server error during verification:', err);
+    console.error('Error details:', {
+      name: err.name,
+      message: err.message,
+      stack: err.stack
+    });
+    res.status(500).json({ msg: 'Server error during verification' });
   }
 };

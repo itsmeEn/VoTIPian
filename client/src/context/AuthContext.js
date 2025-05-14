@@ -42,8 +42,10 @@ export const AuthProvider = ({ children }) => {
 
       if (response.data.requiresVerification) {
         return {
+          success: false,
           requiresVerification: true,
-          email: response.data.email
+          email: response.data.email,
+          msg: response.data.msg || 'Please verify your email before logging in'
         };
       }
 

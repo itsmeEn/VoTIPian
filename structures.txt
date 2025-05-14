@@ -1,0 +1,41 @@
+Root Directory
+
+docker-compose.yml - Docker composition file for containerization
+requirements.txt - Project dependencies
+README.md - Project documentation
+
+Client (Frontend)
+Built with React (based on package.json and structure)
+Uses Tailwind CSS for styling
+
+Key directories:
+/src - Source code
+/public - Static assets
+/build - Production build
+
+Configuration files:
+Dockerfile - Container configuration
+.env - Environment variables
+tailwind.config.js - Tailwind CSS configuration
+Server (Backend)
+Node.js/Express.js backend
+
+Well-organized MVC-like structure:
+/controllers - Request handlers
+/models - Data models
+/routes - API endpoints
+/middleware - Custom middleware (including admin middleware)
+/services - Business logic
+/utils - Utility functions
+/config - Configuration files
+/scripts - Server scripts
+/uploads - File upload directory
+
+Configuration files:
+Dockerfile - Container configuration
+.env - Environment variables
+server.js - Main application entry point
+DevOps
+Docker containerization for both client and server
+Docker Compose for orchestration
+.gitignore for version control

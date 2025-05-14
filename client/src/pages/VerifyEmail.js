@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
+import API_URL from '../api/config';
 
 const VerifyEmail = () => {
   const [searchParams] = useSearchParams();
@@ -8,24 +9,33 @@ const VerifyEmail = () => {
   const [status, setStatus] = useState('verifying');
   const token = searchParams.get('token');
 
+  const [errorMessage, setErrorMessage] = useState('');
+
   useEffect(() => {
     const verifyEmail = async () => {
       try {
-        await axios.get(`http://localhost:5000/api/auth/verify-email?token=${token}`);
+        console.log('Attempting to verify email with token:', token);
+        const response = await axios.get(`${API_URL}/api/auth/verify-email?token=${token}`);
+        console.log('Verification response:', response.data);
         setStatus('success');
         setTimeout(() => {
           navigate('/login');
         }, 3000);
       } catch (error) {
-        setStatus('error');
         console.error('Verification error:', error);
+        console.error('Error response:', error.response?.data);
+        setStatus('error');
+        setErrorMessage(error.response?.data?.msg || 'Failed to verify email address');
       }
     };
 
     if (token) {
+      console.log('Token found, starting verification...');
       verifyEmail();
     } else {
+      console.log('No token found in URL');
       setStatus('error');
+      setErrorMessage('No verification token found in URL');
     }
   }, [token, navigate]);
 
@@ -58,7 +68,7 @@ const VerifyEmail = () => {
                   Failed to verify your email address.
                 </p>
                 <p className="mt-2 text-gray-600">
-                  The verification link may be invalid or expired.
+                  {errorMessage || 'The verification link may be invalid or expired.'}
                 </p>
                 <button
                   onClick={() => navigate('/login')}
