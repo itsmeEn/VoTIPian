@@ -4,8 +4,9 @@ services:
     env: node
     region: oregon
     plan: free
-    buildCommand: cd server && npm install
-    startCommand: cd server && npm run dev
+    rootDir: server
+    buildCommand: npm install
+    startCommand: npm start
     envVars:
       - key: NODE_ENV
         value: production
@@ -23,8 +24,9 @@ services:
   - type: static
     name: votipian-client
     env: static
-    buildCommand: cd client && npm install && npm start
-    staticPublishPath: ./client/build
+    rootDir: client
+    buildCommand: npm install && npm run build
+    staticPublishPath: build
     routes:
       - type: rewrite
         source: /*
