@@ -4,12 +4,8 @@ services:
     env: node
     region: oregon
     plan: free
-    buildCommand: |
-      cd server
-      npm install
-    startCommand: |
-      cd server
-      npm start
+    buildCommand: cd server && npm install
+    startCommand: cd server && npm run dev
     envVars:
       - key: NODE_ENV
         value: production
@@ -27,11 +23,12 @@ services:
   - type: static
     name: votipian-client
     env: static
-    buildCommand: |
-      cd client
-      npm install
-      npm run build
+    buildCommand: cd client && npm install && npm start
     staticPublishPath: ./client/build
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
     envVars:
       - key: REACT_APP_API_URL
         value: https://votipian-server.onrender.com
