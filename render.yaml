@@ -5,11 +5,11 @@ services:
     region: singapore
     plan: free
     buildCommand: |
-      cd server
       npm install
+      npm run build:server
     startCommand: |
       cd server
-      npm start
+      node server.js
     envVars:
       - key: NODE_ENV
         value: production
@@ -30,13 +30,11 @@ services:
     region: singapore
     plan: free
     buildCommand: |
-      cd client
       npm install
-      npm run build
+      npm run build:client
     startCommand: |
       cd client
-      npm install -g serve
-      serve -s build
+      npx serve -s build
     envVars:
       - key: REACT_APP_API_URL
         value: https://votipian-server.onrender.com
