@@ -1,7 +1,7 @@
 services:
   - type: web
     name: votipian-server
-    env: node
+    runtime: node
     region: oregon
     plan: free
     rootDir: server
