@@ -22,17 +22,12 @@ async function startServer() {
    const allowedOrigins = ['https://votipian-2.onrender.com'];
 
 app.use(cors({
-  origin: function (origin, callback) {
-    // Allow requests with no origin (like mobile apps, curl, etc.)
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.includes(origin)) {
-      return callback(null, true);
-    } else {
-      return callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true, // If you use cookies or Authorization headers
+  origin: 'https://votipian-2.onrender.com',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: false // set to false if you don't use cookies for auth
 }));
+
 
 
     // Add this route before other route definitions
