@@ -53,7 +53,7 @@ const Login = () => {
     setIsResendingVerification(true);
     setResendSuccess(false);
     try {
-      const response = await fetch('http://localhost:5000/api/auth/resend-verification', {
+      const response = await fetch('${process.env.REACT_APP_BACKEND_URL}/api/auth/resend-verification', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
