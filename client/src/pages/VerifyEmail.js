@@ -14,7 +14,7 @@ const VerifyEmail = () => {
     const verifyEmail = async () => {
       try {
         console.log('Attempting to verify email with token:', token);
-        const response = await axios.get(`http://localhost:5000/api/auth/verify-email?token=${token}`);
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/auth/verify-email?token=${token}`);
         console.log('Verification response:', response.data);
         setStatus('success');
         setTimeout(() => {
