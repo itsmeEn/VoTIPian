@@ -53,7 +53,7 @@ const Profile = () => {
         };
 
         // Fetch user's votes
-        const votesResponse = await fetch("${process.env.REACT_APP_BACKEND_URL}/api/users/votes", {
+        const votesResponse = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/users/votes`, {
           headers
         });
         if (!votesResponse.ok) {
@@ -63,7 +63,7 @@ const Profile = () => {
         setUserVotes(votesData);
 
         // Fetch user's discussions
-        const discussionsResponse = await fetch("${process.env.REACT_APP_BACKEND_URL}/api/users/discussions", {
+        const discussionsResponse = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/users/discussions`, {
           headers
         });
         if (!discussionsResponse.ok) {
