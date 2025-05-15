@@ -34,6 +34,8 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = async (values) => {
+    console.log("Login form data:", values);
+    
     try {
       const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/auth/login`, {
         email: values.email,
