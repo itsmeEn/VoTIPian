@@ -37,6 +37,7 @@ export const AuthProvider = ({ children }) => {
     console.log("Login form data:", values);
     
     try {
+      console.log("Login form data:", JSON.stringify(values, null, 2)); 
       const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/auth/login`, {
         email: values.email,
         password: values.password
@@ -60,6 +61,7 @@ export const AuthProvider = ({ children }) => {
       return { success: false };
     } catch (error) {
       console.error('Login error:', error);
+      console.error('Backend error response:', error.response?.data);
       throw new Error(error.response?.data?.msg || 'Login failed');
     }
   };
