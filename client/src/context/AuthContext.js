@@ -96,8 +96,7 @@ export const AuthProvider = ({ children }) => {
   const updateProfile = async (userData) => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.put(
-        'http://localhost:5000/api/users/profile',
+      const response = await axios.put(`${REACT_APP_BACKEND_URL}/api/users/profile`,
         userData,
         {
           headers: {
