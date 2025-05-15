@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
-import API_URL from '../api/config';
 
 const VerifyEmail = () => {
   const [searchParams] = useSearchParams();
@@ -15,7 +14,7 @@ const VerifyEmail = () => {
     const verifyEmail = async () => {
       try {
         console.log('Attempting to verify email with token:', token);
-        const response = await axios.get(`${API_URL}/api/auth/verify-email?token=${token}`);
+        const response = await axios.get(`http://localhost:5000/api/auth/verify-email?token=${token}`);
         console.log('Verification response:', response.data);
         setStatus('success');
         setTimeout(() => {
