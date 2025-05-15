@@ -11,33 +11,32 @@ const AdminDashboard = () => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
-  useEffect(() => {
-    const fetchStats = async () => {
-      try {
-        catch (error) {
-  console.error("Error fetching dashboard stats:", error);
-  if (error.response) {
-    // Server responded with a status outside 2xx
-    console.error("Response data:", error.response.data);
-    console.error("Response status:", error.response.status);
-  } else if (error.request) {
-    // Request was made but no response received
-    console.error("No response received:", error.request);
-  } else {
-    // Other errors
-    console.error("Error message:", error.message);
-  }
-  setError("Failed to load dashboard data. Please try again later.");
-  setStats(null);
-}
-
-      } finally {
-        setLoading(false)
+ useEffect(() => {
+  const fetchStats = async () => {
+    try {
+      const response = await api.get("/admin/dashboard-stats")
+      setStats(response.data)
+      setError(null)
+    } catch (error) {
+      console.error("Error fetching dashboard stats:", error)
+      if (error.response) {
+        console.error("Response data:", error.response.data)
+        console.error("Response status:", error.response.status)
+      } else if (error.request) {
+        console.error("No response received:", error.request)
+      } else {
+        console.error("Error message:", error.message)
       }
+      setError("Failed to load dashboard data. Please try again later.")
+      setStats(null)
+    } finally {
+      setLoading(false)
     }
+  }
 
-    fetchStats()
-  }, [])
+  fetchStats()
+}, [])
+
 
   if (loading) {
     return (
