@@ -73,7 +73,7 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (userData) => {
     try {
-      const response = await axios.post('${process.env.REACT_APP_BACKEND_URL}/api/auth/register'), {
+      const response = await axios.post('${process.env.REACT_APP_BACKEND_URL}/api/auth/register', {
         firstName: userData.firstName,
         lastName: userData.lastName,
         email: userData.email,
