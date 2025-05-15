@@ -16,7 +16,7 @@ export const AuthProvider = ({ children }) => {
       const token = localStorage.getItem('token');
       if (token) {
         try {
-          const response = await axios.get('http://localhost:5000/api/auth/me', {
+          const response = await axios.get('${process.env.REACT_APP_BACKEND_URL}/api/auth/me', {
             headers: {
               'Authorization': `Bearer ${token}`
             }
@@ -35,7 +35,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (values) => {
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/login', {
+      const response = await axios.post('${process.env.REACT_APP_BACKEND_URL}/api/auth/login', {
         email: values.email,
         password: values.password
       });
@@ -73,7 +73,7 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (userData) => {
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/register', {
+      const response = await axios.post('${process.env.REACT_APP_BACKEND_URL}/api/auth/register', {
         firstName: userData.firstName,
         lastName: userData.lastName,
         email: userData.email,
